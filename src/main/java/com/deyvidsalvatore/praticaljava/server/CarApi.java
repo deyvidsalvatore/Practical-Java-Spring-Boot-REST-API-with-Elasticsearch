@@ -5,9 +5,11 @@ import com.deyvidsalvatore.praticaljava.repository.CarElasticRepository;
 import com.deyvidsalvatore.praticaljava.service.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -86,4 +88,11 @@ public class CarApi {
     public List<Car> findCarsByParam(@RequestParam String brand, @RequestParam String color) {
         return carElasticRepository.findByBrandAndColor(brand, color);
     }
+
+    @GetMapping(value = "/cars/date")
+    public List<Car> findCarsReleasedAfter(@RequestParam(name = "first_release_date")
+                                               @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate firstReleaseDate) {
+        return carElasticRepository.findByFirstReleaseDateAfter(firstReleaseDate);
+    }
+
 }
