@@ -1,6 +1,7 @@
 package com.deyvidsalvatore.praticaljava.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Car {
 
@@ -15,6 +16,8 @@ public class Car {
     private boolean available;
 
     private LocalDate firstReleaseDate;
+
+    private List<String> additionalFeatures;
 
     public Car() {
     }
@@ -73,6 +76,14 @@ public class Car {
         this.firstReleaseDate = firstReleaseDate;
     }
 
+    public List<String> getAdditionalFeatures() {
+        return additionalFeatures;
+    }
+
+    public void setAdditionalFeatures(List<String> additionalFeatures) {
+        this.additionalFeatures = additionalFeatures;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -82,6 +93,7 @@ public class Car {
                 ", price=" + price +
                 ", available=" + available +
                 ", firstReleaseDate=" + firstReleaseDate +
+                ", additionalFeatures=" + additionalFeatures +
                 '}';
     }
 }
