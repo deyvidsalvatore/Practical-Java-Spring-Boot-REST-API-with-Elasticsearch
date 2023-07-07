@@ -1,10 +1,17 @@
 package com.deyvidsalvatore.praticaljava.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(value = {"color", "serialNumber"})
 public class Engine {
 
     private String fuelType;
 
     private int horsePower;
+
+    private String serialNumber = "SN0000001";
+
+    private String color = "Black";
 
     public Engine() {
 
@@ -31,11 +38,29 @@ public class Engine {
         this.horsePower = horsePower;
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "Engine{" +
                 "fuelType='" + fuelType + '\'' +
                 ", horsePower=" + horsePower +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", color='" + color + '\'' +
                 '}';
     }
 }

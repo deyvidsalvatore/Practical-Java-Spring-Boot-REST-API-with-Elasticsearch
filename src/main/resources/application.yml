@@ -8,6 +8,8 @@ logging:
 spring:
   main:
     banner-mode: OFF
+  jackson:
+    property-naming-strategy: SNAKE_CASE # Change all JSON Attributes to Snake Case globally
 
 server:
   port: 8001

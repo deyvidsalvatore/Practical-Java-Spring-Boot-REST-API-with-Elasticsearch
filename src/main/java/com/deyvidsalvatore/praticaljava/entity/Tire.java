@@ -1,9 +1,12 @@
 package com.deyvidsalvatore.praticaljava.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Tire {
 
     private String manufacturer;
 
+    @JsonProperty(value = "diameter")
     private int size;
 
     private int price;
