@@ -10,6 +10,8 @@ spring:
     banner-mode: OFF
   jackson:
     property-naming-strategy: SNAKE_CASE # Change all JSON Attributes to Snake Case globally
+  elasticsearch:
+    connection-timeout: 5000
 
 server:
   port: 8001
