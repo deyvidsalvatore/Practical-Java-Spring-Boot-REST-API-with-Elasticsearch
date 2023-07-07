@@ -8,6 +8,9 @@ public class Car {
 
     private String type;
 
+    public Car() {
+    }
+
     public Car(String brand, String color, String type) {
         this.brand = brand;
         this.color = color;
