@@ -1,6 +1,8 @@
 package com.deyvidsalvatore.praticaljava.service.impl;
 
 import com.deyvidsalvatore.praticaljava.entity.Car;
+import com.deyvidsalvatore.praticaljava.entity.Engine;
+import com.deyvidsalvatore.praticaljava.entity.Tire;
 import com.deyvidsalvatore.praticaljava.service.CarService;
 import com.deyvidsalvatore.praticaljava.util.RandomDateUtil;
 import org.springframework.stereotype.Service;
@@ -28,12 +30,35 @@ public class RandomCarService implements CarService {
             additionalFeatures.add(ADDITIONAL_FEATURES.get(i));
         }
 
+        var fuel = FUELS.get(ThreadLocalRandom.current().nextInt(FUELS.size()));
+        var horsePower = ThreadLocalRandom.current().nextInt(100, 221);
+
+        var engine = new Engine();
+        engine.setFuelType(fuel);
+        engine.setHorsePower(horsePower);
+
+        var tires = new ArrayList<Tire>();
+
+        for (int i = 0; i < 3; i++){
+            var tire = new Tire();
+            var manufacturer = TIRE_MANUFACTURERS.get(ThreadLocalRandom.current().nextInt(TIRE_MANUFACTURERS.size()));
+            var size = ThreadLocalRandom.current().nextInt(15, 18);
+            var tirePrice = ThreadLocalRandom.current().nextInt(200, 401);
+
+            tire.setManufacturer(manufacturer);
+            tire.setSize(size);
+            tire.setPrice(tirePrice);
+
+            tires.add(tire);
+        }
 
         var result = new Car(brand, color, type);
         result.setAvailable(available);
         result.setPrice(price);
         result.setFirstReleaseDate(firstReleaseDate);
         result.setAdditionalFeatures(additionalFeatures);
+        result.setEngine(engine);
+        result.setTires(tires);
 
         return result;
 

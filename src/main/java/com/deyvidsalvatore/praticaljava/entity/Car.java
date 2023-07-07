@@ -19,6 +19,10 @@ public class Car {
 
     private List<String> additionalFeatures;
 
+    private Engine engine;
+
+    private List<Tire> tires;
+
     public Car() {
     }
 
@@ -84,6 +88,22 @@ public class Car {
         this.additionalFeatures = additionalFeatures;
     }
 
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+
+    public List<Tire> getTires() {
+        return tires;
+    }
+
+    public void setTires(List<Tire> tires) {
+        this.tires = tires;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
@@ -94,6 +114,8 @@ public class Car {
                 ", available=" + available +
                 ", firstReleaseDate=" + firstReleaseDate +
                 ", additionalFeatures=" + additionalFeatures +
+                ", engine=" + engine +
+                ", tires=" + tires +
                 '}';
     }
 }
