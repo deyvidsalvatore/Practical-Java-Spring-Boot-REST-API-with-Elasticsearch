@@ -5,6 +5,11 @@ import com.deyvidsalvatore.praticaljava.exception.IllegalApiParamException;
 import com.deyvidsalvatore.praticaljava.repository.CarElasticRepository;
 import com.deyvidsalvatore.praticaljava.response.ErrorResponse;
 import com.deyvidsalvatore.praticaljava.service.CarService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +30,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping(value = "/api/v1/car")
+@Tag(name = "Car API", description = "Documentation for Car API")
 public class CarApi {
 
     private static final Logger LOG = LoggerFactory.getLogger(CarApi.class);
@@ -44,7 +50,9 @@ public class CarApi {
     }
 
     @PostMapping(value = "/echo", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String echo(@RequestBody Car car) {
+    public String echo(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Car to be echoed")
+            @RequestBody Car car) {
         LOG.info("Car is {}", car);
         return car.toString();
     }
@@ -92,9 +100,16 @@ public class CarApi {
     }
 
     @GetMapping(value = "/cars/{brand}/{color}")
-    public ResponseEntity<Object> findCarsByPath(@PathVariable String brand, @PathVariable String color,
-                                         @RequestParam(defaultValue = "0") int page,
-                                         @RequestParam(defaultValue = "10") int size) {
+    @Operation(summary = "Find cars by path", description = "Find cars by path variable")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Everything is OK"),
+            @ApiResponse(responseCode = "400", description = "Bad input parameter")
+    })
+    public ResponseEntity<Object> findCarsByPath(
+            @Parameter(description = "Brand to be find") @PathVariable String brand,
+            @Parameter(description = "Color to be find") @PathVariable String color,
+            @Parameter(description = "Page number, default 0") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "(Items) Size number, default 10") @RequestParam(defaultValue = "10") int size) {
         var headers = new HttpHeaders();
         headers.add(HttpHeaders.SERVER, "Spring");
         headers.add("X-Custom-Header", "Custom Response Header");
